@@ -55,6 +55,9 @@
     },
     methods: {
       hasSlot (name = 'default') {
+        if (typeof this._slotContents === 'undefined') {
+          return false
+        }
         return name in this._slotContents
       }
     }

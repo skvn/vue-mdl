@@ -3,11 +3,9 @@
     <!-- Generated tab links -->
     <div class="mdl-tabs__tab-bar">
       <tab-link
-          class="mdl-tabs__tab"
           v-for="tab in tabs"
           track-by="id"
           :no-ripple-effect="noRippleEffect"
-          :class="{ 'is-active': isSelected(tab) }"
           @click.prevent="selectTab(tab)"
           :tab="tab"
       ></tab-link>
@@ -34,8 +32,7 @@ function findTabIndex (tabs, id) {
 export default {
   props: {
     selected: {
-      required: true,
-      twoWay: true
+      required: false
     },
     noRippleEffect: {
       fill: true,

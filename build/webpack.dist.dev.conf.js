@@ -3,6 +3,7 @@ var config = require('./webpack.base.conf')
 
 // naming output files with hashes for better caching.
 // dist/index.html will be auto-generated with correct URLs.
+config.output.path = "C:/Projects/skvn/crud-wizard/vue/node_modules/vue-mdl/dist/"
 config.output.filename = 'vue-mdl.js'
 config.output.library = 'VueMdl'
 config.output.libraryTarget = 'umd'

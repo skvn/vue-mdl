@@ -24,7 +24,7 @@
     i.mdl-icon-toggle__label.material-icons keyboard_arrow_down
   label.mdl-textfield__label(v-bind:for.once='id') {{label}}
   ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(v-bind:for.once='id')
-    li.mdl-menu__item(v-for='option in optionsObject', v-on:click='selectValue(option)') {{option.name}}
+    li.mdl-menu__item(v-for='(k,val) in options', v-on:click='selectValue(k)') {{val}}
 </template>
 
 <script>
@@ -35,45 +35,31 @@ export default {
     }
   },
   methods: {
-    selectValue (option) {
-      this.value = option.value
-      this.name = option.name
+    selectValue (key) {
+      this.value = key
+      this.name = this.options[key]
       let event = new Event('change')
       this.$el.dispatchEvent(event)
     },
     setName () {
       this.name = null
-      for (let i = 0; i < this.optionsObject.length; ++i) {
-        let option = this.optionsObject[i]
-        if (this.value === option.value) this.name = option.name
+      if (this.options && this.value && this.value in this.options) {
+        this.name = this.options[this.value]
       }
-      if (!this.name) this.name = this.value
       this.$els.textfield.MaterialTextfield.change(this.name)
       this.$els.textfield.MaterialTextfield.boundBlurHandler()
-    }
-  },
-  computed: {
-    optionsObject () {
-      if (this.options && this.options.length !== undefined) {
-        return this.options.map((option) => {
-          if (typeof option === 'string') {
-            return {
-              name: option,
-              value: option
-            }
-          } else {
-            return option
-          }
-        })
-      } else {
-        return []
+    },
+    ensureId () {
+      if (!this.id) {
+        this.id = makeid()
       }
     }
   },
+
   props: {
     label: String,
     id: {
-      required: true
+      required: false
     },
     value: {
       required: false
@@ -82,9 +68,13 @@ export default {
       required: true
     }
   },
+  created () {
+    this.ensureId()
+  },
   ready () {
     componentHandler.upgradeElements(this.$el)
     this.setName()
+
   },
   watch: {
     value () {
@@ -92,4 +82,15 @@ export default {
     }
   }
 }
+
+function makeid () {
+  let text = ''
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  for (let i = 0; i < 5; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
+  return text
+}
+
 </script>

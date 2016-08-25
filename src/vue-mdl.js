@@ -22,6 +22,9 @@ import MdlDialog from './dialog.vue'
 import MdlTabs from './tabs/tabs.vue'
 import MdlTab from './tabs/tab.vue'
 
+// new
+import MdlChip from './chip.vue'
+
 export const components = {
   MdlCheckbox,
   MdlSwitch,
@@ -41,7 +44,9 @@ export const components = {
   MdlSelect,
   MdlDialog,
   MdlTabs,
-  MdlTab
+  MdlTab,
+  // new
+  MdlChip
 }
 
 export const directives = {

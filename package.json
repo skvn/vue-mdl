@@ -11,6 +11,7 @@
     "build": "npm run build:dev && npm run build:prod",
     "build:prod": "webpack --bail --progress --hide-modules --config build/webpack.dist.prod.conf.js",
     "build:dev": "webpack --bail --progress --hide-modules --config build/webpack.dist.dev.conf.js",
+    "build:dev:watch": "webpack --watch  --progress --config build/webpack.dist.dev.conf.js",
     "dev": "karma start test/unit/karma.dev.conf.js",
     "dev:integration": "node build/dev-server.js",
     "dev:doc": "NODE_ENV=doc node build/dev-server.js",
