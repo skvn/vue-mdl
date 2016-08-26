@@ -1,11 +1,13 @@
 <template lang="jade">
 .mdl-dialog-container(v-show='show')
-  .mdl-dialog
-    .mdl-dialog__title {{title}}
+  .mdl-dialog(v-bind:class='{ "mdl-dialog__wide": wide, "mdl-dialog__50": half }')
+    .mdl-dialog__title
+      slot(name='title')
+        {{title}}
     .mdl-dialog__content
-      slot
+      slot(name='content')
     .mdl-dialog__actions(v-bind:class='{ "mdl-dialog__actions--full-width": fullWidth }')
-      slot(name='actions')
+      slot(name='buttons')
         mdl-button.mdl-js-ripple-effect(v-on:click.stop='close') Close
 </template>
 
@@ -27,6 +29,14 @@ export default {
       type: String
     },
     fullWidth: {
+      fill: true,
+      default: false
+    },
+    wide: {
+      fill: true,
+      default: false
+    },
+    half: {
       fill: true,
       default: false
     }
@@ -63,6 +73,12 @@ export default {
   padding: 1em;
   color: black;
   width: initial;
-  min-width: 280px;
+  min-width: 500px;
+}
+.mdl-dialog__wide {
+  width: 90% !important;
+}
+.mdl-dialog__50 {
+  width: 50% !important;
 }
 </style>

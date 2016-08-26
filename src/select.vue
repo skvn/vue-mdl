@@ -43,7 +43,7 @@ export default {
     },
     setName () {
       this.name = null
-      if (this.options && this.value && this.value in this.options) {
+      if (this.options && this.value in this.options) {
         this.name = this.options[this.value]
       }
       this.$els.textfield.MaterialTextfield.change(this.name)
@@ -74,7 +74,6 @@ export default {
   ready () {
     componentHandler.upgradeElements(this.$el)
     this.setName()
-
   },
   watch: {
     value () {
